@@ -12,9 +12,7 @@ export async function GET(request) {
             status: false
         })
     }
-
 }
-
 export async function POST(request) {
     const { title, content, userId } = await request.json()
     try {

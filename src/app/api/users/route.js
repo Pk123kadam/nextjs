@@ -25,7 +25,6 @@ export function DELETE(request) {
         status: 201, statusText: "hey changed text"
     })
 }
-
 export async function POST(request) {
     try {
         const { name, email, password, about, profileURL } = await request.json()
