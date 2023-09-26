@@ -32,8 +32,8 @@ export async function GET(request, { params }) {
             status: false
         })
     }
-
 }
+
 export async function PUT(request, { params }) {
     const { userId } = params
     const { name, email, password, about, profileURL } = await request.json()
@@ -53,5 +53,6 @@ export async function PUT(request, { params }) {
             status: false
         })
     }
+
 
 }

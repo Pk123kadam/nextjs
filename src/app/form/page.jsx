@@ -7,11 +7,13 @@ import { toast } from 'react-toastify';
 
 function page() {
     const [user, setUser] = useState([])
+    const [disabled, setDisabled] = useState(false)
     const [data, setData] = useState({
         name: "",
         email: "",
         password: ""
     })
+    const [updateApi, setUpdateApi] = useState({})
 
     function handlechange(e) {
         setData({
@@ -22,10 +24,33 @@ function page() {
     console.log('data', data)
     async function handlesubmit(e) {
         e.preventDefault()
-        let res = await axios.post("http://localhost:8080/api/users", data)
+        if (Object.keys(updateApi).length !== 0) {
+            let res = await axios.put("http://localhost:8080/api/users/" + updateApi._id, data)
+            setData({
+                name: "",
+                email: "",
+                password: ""
+            })
+        }
+        else {
+            let res = await axios.post("http://localhost:8080/api/users", data)
+            setData({
+                name: "",
+                email: "",
+                password: ""
+            })
+        }
+        setDisabled(false)
     }
     async function handledelete(id) {
         let data = await axios.delete("http://localhost:8080/api/users/" + id)
+    }
+    function handleEdit(id) {
+        let obj = user.find((e) => e._id == id)
+        setUpdateApi(obj)
+        setData(obj)
+        setDisabled(true)
+
     }
     useEffect(() => {
         let call = async () => {
@@ -34,8 +59,6 @@ function page() {
         }
         call()
     }, [])
-
-
     return (
         <>
             <div className='w-25 mx-auto'>
@@ -65,18 +88,17 @@ function page() {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        user?.map((e) => {
-                            return <>
-                                <tr>
-                                    <td>{e.name}</td>
-                                    <td>{e.email}</td>
-                                    <td>{e.password}</td>
-                                    <td><button className='btn btn-primary'>Update</button></td>
-                                    <td><button className='btn btn-danger' onClick={() => handledelete(e._id)}>Delete</button></td>
-                                </tr>
-                            </>
-                        })
+                    {user?.map((e) => {
+                        return <>
+                            <tr>
+                                <td>{e.name}</td>
+                                <td>{e.email}</td>
+                                <td>{e.password}</td>
+                                <td><button className='btn btn-primary' disabled={disabled} onClick={() => handleEdit(e._id)}>Update</button></td>
+                                <td><button className='btn btn-danger' disabled={disabled} onClick={() => handledelete(e._id)}>Delete</button></td>
+                            </tr>
+                        </>
+                    })
                     }
 
                 </tbody>

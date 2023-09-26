@@ -17,20 +17,13 @@ export async function GET(request) {
     return NextResponse.json(users)
 
 }
-export function DELETE(request) {
-    return NextResponse.json({
-        message: "deleted",
-        status: true
-    }, {
-        status: 201, statusText: "hey changed text"
-    })
-}
+
+
 export async function POST(request) {
     try {
         const { name, email, password, about, profileURL } = await request.json()
         const user = new User({
             name, email, password, about, profileURL
-
         })
         const createdUser = await user.save()
         const response = NextResponse.json(user, {
