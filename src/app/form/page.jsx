@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import API from '../endPoints';
 
 
 function page() {
@@ -25,7 +26,7 @@ function page() {
     async function handlesubmit(e) {
         e.preventDefault()
         if (Object.keys(updateApi).length !== 0) {
-            let res = await axios.put("http://localhost:8080/api/users/" + updateApi._id, data)
+            let res = await axios.put(`${API.users}/` + updateApi._id, data)
             setData({
                 name: "",
                 email: "",
@@ -33,7 +34,7 @@ function page() {
             })
         }
         else {
-            let res = await axios.post("http://localhost:8080/api/users", data)
+            let res = await axios.post(API.users, data)
             setData({
                 name: "",
                 email: "",
@@ -43,7 +44,7 @@ function page() {
         setDisabled(false)
     }
     async function handledelete(id) {
-        let data = await axios.delete("http://localhost:8080/api/users/" + id)
+        let data = await axios.delete(`${API.users}/` + id)
     }
     function handleEdit(id) {
         let obj = user.find((e) => e._id == id)
@@ -54,7 +55,7 @@ function page() {
     }
     useEffect(() => {
         let call = async () => {
-            let data = await axios.get("http://localhost:8080/api/users")
+            let data = await axios.get(API.users)
             setUser(data.data)
         }
         call()

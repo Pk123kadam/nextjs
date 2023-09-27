@@ -1,5 +1,6 @@
 import { Task } from "@/app/models/tasks"
 import { NextResponse } from "next/server"
+import { getResponseMessage } from "@/app/helper/responseMessage"
 
 export async function GET(request) {
     try {
@@ -7,10 +8,7 @@ export async function GET(request) {
         return NextResponse.json(task)
 
     } catch (err) {
-        return NextResponse.json({
-            message: "failed to fetch the tasks",
-            status: false
-        })
+        return getResponseMessage("error in getting data", 404, false)
     }
 }
 export async function POST(request) {
@@ -25,9 +23,6 @@ export async function POST(request) {
         })
 
     } catch (err) {
-        return NextResponse.json({
-            message: "failed to create",
-            status: false
-        })
+        return getResponseMessage("failed to create task!!", 500, false)
     }
 }
