@@ -4,38 +4,18 @@ import Link from 'next/link'
 function CustomNavbar() {
     return (
         <>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    {/* <a class="navbar-brand" href="#">Navbar</a> */}
-                    <Link href="/">Navbar</Link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                {/* <a class="nav-link active" aria-current="page" href="#">Home</a> */}
-                                <Link href="/about">About</Link>
-                            </li>
-                            {/* <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled">Disabled</a>
-                            </li> */}
-                        </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
+            <nav className='bg-dark text-light px-4 py-1 d-flex align-items-center justify-content-between fixed-top'>
+                <h1><Link href="/" className='text-decoration-none text-white'>Next</Link></h1>
+
+                <div className='d-flex align-items-center'>
+                    <ul className='d-flex gap-3'>
+                        <li><Link href="/" className='text-decoration-none text-white'>Home</Link></li>
+                        <li><Link href="/formik" className='text-decoration-none text-white'>Form</Link></li>
+                        <li>Sign Up</li>
+                        <li>Login</li>
+                    </ul>
                 </div>
-            </nav>
+            </nav >
         </>
     )
 }
