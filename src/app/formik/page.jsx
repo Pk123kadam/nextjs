@@ -61,7 +61,6 @@ function page() {
                                 ) : null}</div>
 
                                 <div>
-                                    {/* <Field name="status" className="border border-dark w-100" /> */}
                                     <select name="status" className="border border-dark w-100" onChange={handleChange} onBlur={handleBlur}>
                                         <option>--select--</option>
                                         <option value="pending">Pending</option>
