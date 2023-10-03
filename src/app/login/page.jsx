@@ -1,12 +1,14 @@
 "use client"
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup';
-import { Logged } from '@/services/loginServices';
+import { Current, Logged } from '@/services/loginServices';
 import { useRouter } from 'next/navigation';
+import UserContext from '@/context/userContext';
 function Login() {
     const router = useRouter()
+    const context = useContext(UserContext)
     const SignupSchema = Yup.object().shape({
 
         email: Yup.string().email('Invalid email').required('Required'),
@@ -32,15 +34,13 @@ function Login() {
                                     let data = await Logged(values)
                                     console.log('data', data)
                                     if (data) {
+                                        context.setUser(data.user)
                                         router.push("/profile/user")
                                     }
                                 }
                                 call()
                                 resetForm()
-
-
                             } catch (err) {
-
                             }
                         }}
                     >
@@ -52,7 +52,6 @@ function Login() {
                                 <div style={{ height: "30px", color: "red" }}>{errors.email && touched.email ? (
                                     <div>{errors.email}</div>
                                 ) : null}</div>
-
                                 <div>
                                     <label>Password:</label>
                                     <Field name="password" className="border border-dark  w-100" type="password" />

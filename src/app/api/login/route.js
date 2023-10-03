@@ -28,7 +28,8 @@ export async function POST(request) {
         }, process.env.JWT_key)
         const response = NextResponse.json({
             message: "Login Success!!",
-            success: true
+            success: true,
+            user: user
         })
         response.cookies.set("authToken", token, {
             expiresIn: "1d",

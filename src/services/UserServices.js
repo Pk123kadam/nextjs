@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 export async function addUser(user) {
     try {
+        console.log('user', user)
         let data = await httpAxios.post("/api/users", user)
         toast.success("user has been created!!", {
             position: "top-center"

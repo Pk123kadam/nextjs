@@ -78,8 +78,6 @@ function SignUp() {
                                 </div>
                                 <div style={{ height: "30px", color: "red" }}>  {errors.about && touched.about ? <div>{errors.about}</div> : null}
                                 </div>
-
-
                                 <div className='text-center'> <button type="submit" className='btn btn-primary'>Submit</button></div>
                             </Form>
                         )}

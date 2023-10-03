@@ -18,3 +18,40 @@ export async function Logged(login) {
 
     }
 }
+
+export async function Current() {
+    try {
+        let data = await httpAxios.get("/api/current")
+        // toast.success("logged in!!", {
+        //     position: "top-center"
+        // })
+        console.log('data', data)
+        return data.data
+
+
+    } catch (err) {
+        console.log('err', err)
+        toast.error("not able to login", {
+            position: "top-center"
+        })
+
+    }
+}
+export async function Logout() {
+    try {
+        let data = await httpAxios.post("/api/logout")
+        // toast.success("logged in!!", {
+        //     position: "top-center"
+        // })
+        console.log('data', data)
+        return data.data
+
+
+    } catch (err) {
+        console.log('err', err)
+        toast.error("not able to login", {
+            position: "top-center"
+        })
+
+    }
+}
