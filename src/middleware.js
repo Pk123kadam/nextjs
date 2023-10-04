@@ -7,9 +7,10 @@ export function middleware(request) {
         request.nextUrl.pathname === "/login" ||
         request.nextUrl.pathname === "/signup"
     console.log('loggedInUserNotAccessPaths', loggedInUserNotAccessPaths)
-    if (request.nextUrl.pathname === "/api/login") {
+    if (request.nextUrl.pathname === "/api/login" || request.nextUrl.pathname === "/api/users" || request.nextUrl.pathname === "/api/tasks") {
         return;
     }
+
     if (loggedInUserNotAccessPaths) {
         if (authToken) {
             return NextResponse.redirect(new URL("/profile/user", request.url))
@@ -22,5 +23,5 @@ export function middleware(request) {
 }
 
 export const config = {
-    matcher: ["/", "/login", "/signup", "/formik", "/profile/:path*", "/api/:path*"]
+    matcher: ["/", "/login", "/signup", "/formik", "/showtask", "/profile/:path*", "/api/:path*"]
 }

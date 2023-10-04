@@ -1,6 +1,8 @@
 import { Task } from "@/app/models/tasks"
 import { NextResponse } from "next/server"
 import { getResponseMessage } from "@/app/helper/responseMessage"
+import jwt from "jsonwebtoken";
+
 
 export async function GET(request) {
     try {
@@ -14,8 +16,10 @@ export async function GET(request) {
 export async function POST(request) {
     const { title, content, userId } = await request.json()
     try {
+        const authToken = request.cookies.get("authToken")?.value
+        const data = jwt.verify(authToken, process.env.JWT_KEY)
         const task = new Task({
-            title, content, userId
+            title, content, userId: data._id
         })
         const createdTask = await task.save()
         return NextResponse.json(createdTask, {

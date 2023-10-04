@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useEffect, useState } from 'react'
 import UserContext from './userContext'
 import { toast } from 'react-toastify'
@@ -20,7 +20,6 @@ const UserProvider = ({ children }) => {
             toast.error("error in loading current user")
             setUser(undefined)
         }
-
     }, [])
     console.log('user', user)
     return (

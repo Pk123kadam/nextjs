@@ -18,3 +18,16 @@ export async function addTask(task) {
 
     }
 }
+
+export async function getTask() {
+    try {
+        let data = await httpAxios.get("/api/tasks")
+        return data.data
+
+    } catch (err) {
+        toast.error("not able to get", {
+            position: "top-center"
+        })
+
+    }
+}

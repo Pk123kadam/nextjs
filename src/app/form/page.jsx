@@ -62,7 +62,7 @@ function page() {
     }, [])
     return (
         <>
-            <div className='w-25 mx-auto'>
+            <div className='w-25 mx-auto' style={{ marginTop: "130px" }}>
                 <form onSubmit={handlesubmit}>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -72,10 +72,7 @@ function page() {
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='email' value={data.email} onChange={handlechange} />
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name='password' onChange={handlechange} value={data.password} />
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -84,7 +81,7 @@ function page() {
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Password</th>
+                        {/* <th scope="col">Password</th> */}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -94,7 +91,7 @@ function page() {
                             <tr>
                                 <td>{e.name}</td>
                                 <td>{e.email}</td>
-                                <td>{e.password}</td>
+                                {/* <td>{e.password}</td> */}
                                 <td><button className='btn btn-primary' disabled={disabled} onClick={() => handleEdit(e._id)}>Update</button></td>
                                 <td><button className='btn btn-danger' disabled={disabled} onClick={() => handledelete(e._id)}>Delete</button></td>
                             </tr>
