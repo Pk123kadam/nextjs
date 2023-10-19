@@ -14,18 +14,17 @@ export async function GET(request) {
     }
 }
 export async function POST(request) {
-    const { title, content, userId } = await request.json()
+    const { title, content, userId, status } = await request.json()
     try {
         const authToken = request.cookies.get("authToken")?.value
         const data = jwt.verify(authToken, process.env.JWT_KEY)
         const task = new Task({
-            title, content, userId: data._id
+            title, content, userId: data._id, status
         })
         const createdTask = await task.save()
         return NextResponse.json(createdTask, {
             status: 201
         })
-
     } catch (err) {
         return getResponseMessage("failed to create task!!", 500, false)
     }

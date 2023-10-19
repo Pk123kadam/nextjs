@@ -1,6 +1,6 @@
 function About() {
     return (
-        <div>
+        <div style={{ marginTop: "200px" }}>
             this is about page
         </div>
     )

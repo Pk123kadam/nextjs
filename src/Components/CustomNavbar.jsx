@@ -30,6 +30,9 @@ function CustomNavbar() {
                     <ul className='d-flex gap-3'>
                         <li><Link href="/" className='text-decoration-none text-white'>Home</Link></li>
                         <li><Link href="/formik" className='text-decoration-none text-white'>Task</Link></li>
+                        <li><Link href="/form" className='text-decoration-none text-white'>User</Link></li>
+                        <li><Link href="/about" className='text-decoration-none text-white'>About</Link></li>
+                        <li><Link href="/about/admin" className='text-decoration-none text-white'>Admin</Link></li>
                         {
                             context?.user?.name && (
                                 <>
@@ -38,7 +41,6 @@ function CustomNavbar() {
                                 </>
                             )
                         }
-
                         {
                             !context?.user?.name && (
                                 <>

@@ -52,9 +52,13 @@ function Login() {
                                 <div style={{ height: "30px", color: "red" }}>{errors.email && touched.email ? (
                                     <div>{errors.email}</div>
                                 ) : null}</div>
-                                <div>
+                                {/* <div>
                                     <label>Password:</label>
                                     <Field name="password" className="border border-dark  w-100" type="password" />
+                                </div> */}
+                                <div>
+                                    <label>Password: </label>
+                                    <Field name="password" className="border border-dark w-100" type="password" />
                                 </div>
                                 <div style={{ height: "30px", color: "red" }}>  {errors.password && touched.password ? <div>{errors.password}</div> : null}
                                 </div>

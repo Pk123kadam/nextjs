@@ -1,6 +1,6 @@
 function Admin() {
     return (
-        <div>
+        <div style={{ marginTop: "200px" }}>
             this is admin page
         </div>
     )
