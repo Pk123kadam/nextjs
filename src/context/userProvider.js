@@ -16,6 +16,7 @@ const UserProvider = ({ children }) => {
             }
             call()
 
+
         } catch (err) {
             toast.error("error in loading current user")
             setUser(undefined)

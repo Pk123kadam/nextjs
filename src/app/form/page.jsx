@@ -4,18 +4,22 @@ import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import API from '../endPoints';
+import { useDispatch, useSelector } from 'react-redux';
+// import { addUser } from '@/services/UserServices';
+import { userAdd, userDelete, userGet, userUpdate } from '@/redux/features/userSlice';
+import { Loader } from '../loader/Loader';
 
 
 function page() {
-    const [user, setUser] = useState([])
     const [disabled, setDisabled] = useState(false)
     const [data, setData] = useState({
         name: "",
         email: "",
         password: ""
     })
+    const dispatch = useDispatch()
     const [updateApi, setUpdateApi] = useState({})
-
+    const { user, load } = useSelector((state) => state.user)
     function handlechange(e) {
         setData({
             ...data,
@@ -26,15 +30,17 @@ function page() {
     async function handlesubmit(e) {
         e.preventDefault()
         if (Object.keys(updateApi).length !== 0) {
-            let res = await axios.put(`${API.users}/` + updateApi._id, data)
+            // let res = await axios.put(`${API.users}/` + updateApi._id, data)
+            dispatch(userUpdate(data))
             setData({
                 name: "",
                 email: "",
-                password: ""
             })
         }
         else {
-            let res = await axios.post(API.users, data)
+            console.log("add")
+            dispatch(userAdd(data))
+            // let res = await axios.post(API.users, data)
             setData({
                 name: "",
                 email: "",
@@ -44,7 +50,8 @@ function page() {
         setDisabled(false)
     }
     async function handledelete(id) {
-        let data = await axios.delete(`${API.users}/` + id)
+        // let data = await axios.delete(`${API.users}/` + id)
+        dispatch(userDelete(id))
     }
     function handleEdit(id) {
         let obj = user.find((e) => e._id == id)
@@ -54,11 +61,12 @@ function page() {
 
     }
     useEffect(() => {
-        let call = async () => {
-            let data = await axios.get(API.users)
-            setUser(data.data)
-        }
-        call()
+        // let call = async () => {
+        //     let data = await axios.get(API.users)
+        //     setUser(data.data)
+        // }
+        // call()
+        dispatch(userGet())
     }, [])
     return (
         <>
@@ -76,8 +84,7 @@ function page() {
                         <label for="exampleInputEmail1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='password' value={data.password} onChange={handlechange} />
                     </div> */}
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button className='btn btn-primary' type='submit'>Submit</button>
                 </form>
             </div>
             <table class="table">
@@ -90,7 +97,7 @@ function page() {
                     </tr>
                 </thead>
                 <tbody>
-                    {user?.map((e) => {
+                    {load ? <Loader /> : user?.map((e) => {
                         return <>
                             <tr>
                                 <td>{e.name}</td>
@@ -102,6 +109,7 @@ function page() {
                         </>
                     })
                     }
+
 
                 </tbody>
             </table>

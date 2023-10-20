@@ -8,6 +8,7 @@ import Head from 'next/head'
 import Script from 'next/script'
 import { ToastContainer } from 'react-toastify'
 import UserProvider from '@/context/userProvider'
+import { ReduxProvider } from '@/redux/features/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,9 @@ export default function RootLayout({ children }) {
         <UserProvider>
           <ToastContainer />
           <CustomNavbar />
-          {children}
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
           <Footer />
         </UserProvider>
       </body>
