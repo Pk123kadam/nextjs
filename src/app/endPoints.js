@@ -1,4 +1,4 @@
 const API = {
-    users: "http://localhost:8080/api/users"
+    users: "http://localhost:3000/api/users"
 }
 export default API
